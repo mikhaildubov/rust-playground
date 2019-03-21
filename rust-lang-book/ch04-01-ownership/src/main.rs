@@ -11,12 +11,15 @@ fn test_string_types() {
 }
 
 fn test_ownership_basics() {
-    // Strings are stored on the heap and so the concept of ownership
-    // does apply to them
+    // The idea of ownership is that the memory is automatically returned once the variable
+    // that owns it goes out of scope, thus no need for a fully-fledged GC. However now only
+    // one variable at a time can own the memory on the heap.
+
+    // Strings are stored on the heap and so the concept of ownership applies to them
     let s1 = String::from("hello");  // s1 owns the String on the heap
     let s2 = s1;                     // s2 now owns the String, s1 gets invalidated
     //println!("{}, world!", s1);    // will fail as s1 is no longer valid
-    println!("{}, world!", s2);      // heap memory owned by s2 gets freed at this point
+    println!("{}, world!", s2);
 
     // The same thing works just fine with integers, as they are stored on the stack
     // (not on the heap) and so there is no need to free up any heap memory when it goes
@@ -25,7 +28,7 @@ fn test_ownership_basics() {
     let i2 = i1;
     println!("{}", i1);
     println!("{}", i2);
-}
+}  // heap memory owned by s2 gets freed at this point
 
 fn test_clone() {
     let s1 = String::from("hello");
@@ -44,13 +47,12 @@ fn test_taking_ownership() {
 
     let x = 5;                      // x comes into scope
 
-    makes_copy(x);                  // x would move into the function,
-                                    // but i32 is Copy, so it’s okay to still use x afterwards
+    makes_copy(x);                  // x would move into the function, but i32 has the Copy trait,
+                                    // so it’s okay to still use x afterwards
 
     println!("{}", x);              // ... like that
 
-} // Here, x goes out of scope, then s. But because s's value was moved, nothing
-  // special happens.
+} // Here, s and x go out of scope, then s. But s's value was moved, so nothing special happens.
 
 fn takes_ownership(some_string: String) { // some_string comes into scope
     println!("{}", some_string);
