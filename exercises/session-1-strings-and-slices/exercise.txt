@@ -1,0 +1,51 @@
+// NOTE: Run with `cargo test` rather than `cargo run`
+
+// Part 1: substring indices
+// O(n^3) solutions are fine
+
+#![crate_type = "lib"]
+
+/// Find indicies into `text` which point to the start of substrings equal to `subject`
+pub fn find_substring_indicies(text: &str, subject: &str) -> Vec<usize> {
+    return Vec::new();
+}
+
+#[test]
+fn simple_test1() {
+    let text = "ababacaba";
+    let subject = "ab";
+    let result = find_substring_indicies(text, subject);
+    assert_eq!(result, vec![0, 2, 6]);
+}
+
+#[test]
+fn simple_test2() {
+    let text = "aaabaa";
+    let subject = "aa";
+    let result = find_substring_indicies(text, subject);
+    assert_eq!(result, vec![0, 1, 4]);
+}
+
+// Part 2: anagrams
+
+/// Find indicies into `text` which point to the start of anagrams of `subject`
+pub fn find_anagram_indicies(text: &str, subject: &str) -> Vec<usize> {
+    return Vec::new();
+}
+
+#[test]
+fn simple_test3() {
+    let text = "cbaebabacd";
+    let subject = "abc";
+    let result = find_anagram_indicies(text, subject);
+    assert_eq!(result, vec![0, 6]);
+}
+
+#[test]
+fn simple_test4() {
+    let text = "acbaebabacd";
+    let subject = "abc";
+    let result = find_anagram_indicies(text, subject);
+    assert_eq!(result, vec![0, 1, 7]);
+}
+
