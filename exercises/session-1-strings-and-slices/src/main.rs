@@ -1,7 +1,5 @@
 // NOTE: Run with `cargo test` rather than `cargo run`
 
-// O(n^3) solutions are fine
-
 // Part 1: substring indices
 
 #![crate_type = "lib"]
@@ -41,12 +39,12 @@ fn simple_test2() {
 /// Find indices into `text` which point to the start of anagrams of `subject`
 pub fn find_anagram_indices(text: &str, subject: &str) -> Vec<usize> {
     let mut indices = Vec::new();
-    let mut subject_sorted: Vec<char> = subject.chars().collect();
+    let mut subject_sorted: Vec<char> = subject.chars().collect();  // not sorted yet
     subject_sorted.sort();
 
     for i in 0..(text.len() - subject.len() + 1) {
         let text_slice = &text[i..i+subject.len()];
-        let mut text_slice_sorted: Vec<char> = text_slice.chars().collect();
+        let mut text_slice_sorted: Vec<char> = text_slice.chars().collect();  // not sorted yet
         text_slice_sorted.sort();
         if text_slice_sorted == subject_sorted {
             indices.push(i);
